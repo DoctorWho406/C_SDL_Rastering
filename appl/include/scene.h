@@ -1,20 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include "SDL.h"
-
-typedef struct {
-    int width;
-    int height;
-    SDL_Renderer* renderer;
-} screen_t;
-
-typedef struct {
-    Uint8 r;
-    Uint8 g;
-    Uint8 b;
-    Uint8 a;
-} color_t;
-
+#include "screen.h"
 
 typedef struct {
     screen_t* screen;
