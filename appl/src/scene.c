@@ -1,41 +1,43 @@
-#include "scene.h"
 #include "SDL.h"
-#include <stdlib.h>
+#include "color.h"
+#include "scene.h"
 #include "screen.h"
-#include "line-raster.h"
+#include "line_raster.h"
 
-scene_t* scene_create(int screen_width, int screen_height, SDL_Renderer* r) {
-    scene_t* scene = (scene_t*)malloc(sizeof(scene_t));
-    scene->screen = screen_new(screen_width, screen_height, r);
+scene_t *scene_create(int screen_width, int screen_height, SDL_Renderer *renderer) {
+    scene_t *scene = (scene_t *)SDL_malloc(sizeof(scene_t));
+    if (!scene) {
+        return NULL;
+    }
+    screen_t *screen = screen_create(screen_width, screen_height, renderer);
+    if (!screen) {
+        SDL_free(scene);
+        return NULL;
+    }
+    scene->screen = screen;
     return scene;
 }
 
-void scene_update(scene_t* s, float delta_time) {
-    screen_clear(s->screen);
-   
+void scene_update(scene_t *scene, float delta_time) {
+    screen_clear(scene->screen);
+
     color_t red = {255, 0, 0, 255};
 
-    static float x1 = 50;
-    static float y1 = 50;
-    static float x2 = 200;
-    static float y2 = 250;
+    int x1 = 50;
+    int y1 = 200;
+    int x2 = 125;
+    int y2 = 50;
+    int x3 = 200;
+    int y3 = 200;
 
-    dda_line_raster(s->screen, (int)x1, (int)y1, (int)x2, (int)y2, red);
-    //dda_line_raster(s->screen, x1+10, y1, x2+10, y2, red);
-    float speed = 1;
-    x1 += speed * delta_time;
-    x2 += speed * delta_time;
+    dda_line_raster(scene->screen, x1, y1, x2, y2, &red);
+    dda_line_raster(scene->screen, x2, y2, x3, y3, &red);
+    dda_line_raster(scene->screen, x3, y3, x1, y1, &red);
 
-
-    //Draw Triangle Edges
-    dda_line_raster(s->screen, 320, 240, 240, 460, red);  //left
-    dda_line_raster(s->screen, 320, 240, 400, 460, red); //right
-    dda_line_raster(s->screen, 240, 460, 400, 460, red); //base
-
-    screen_blit(s->screen);
+    screen_blit(scene->screen);
 }
 
-void scene_destroy(scene_t* s) {
-    screen_free(s->screen);
-    free(s);
+void scene_destroy(scene_t *scene) {
+    screen_destroy(scene->screen);
+    SDL_free(scene);
 }
