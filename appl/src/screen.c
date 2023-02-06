@@ -1,6 +1,6 @@
 #include "screen.h"
 
-screen_t *screen_new(int w, int h, SDL_Renderer *r) {
+screen_t *screen_create(int w, int h, SDL_Renderer *r) {
     screen_t *screen = (screen_t *)SDL_malloc(sizeof(screen_t));
     screen->width = w;
     screen->height = h;
@@ -12,17 +12,17 @@ screen_t *screen_new(int w, int h, SDL_Renderer *r) {
     return screen;
 }
 
-void screen_free(screen_t *s) {
+void screen_destroy(screen_t *s) {
     SDL_DestroyTexture(s->texture);
     SDL_free(s->color_buffer);
     SDL_free(s);
 }
 
-void screen_put_pixel(screen_t *screen, int x, int y, color_t* color) {
-    if (x < 0 || x >= screen->width) return;
-    if (y < 0 || y >= screen->height) return;
+void screen_put_pixel(screen_t *screen, vector2_t pixel, color_t* color) {
+    if (pixel.x < 0 || pixel.x >= screen->width) return;
+    if (pixel.y < 0 || pixel.y >= screen->height) return;
 
-    int index = (y * screen->width + x) * 4;
+    int index = (pixel.y * screen->width + pixel.x) * 4;
     screen->color_buffer[index + 0] = color->r;
     screen->color_buffer[index + 1] = color->g;
     screen->color_buffer[index + 2] = color->b;
