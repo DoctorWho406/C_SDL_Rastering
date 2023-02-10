@@ -3,7 +3,7 @@
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
 #include <stdio.h>
-#include "scene.h"
+#include "rastering_scene.h"
 #include <stdbool.h>
 
 int main() {
@@ -40,7 +40,7 @@ int main() {
 
     char title[100];
 
-    scene_t *scene = scene_create(width, height, renderer);
+    scene_t *scene = scene_create(width, height, 40, renderer);
 
     while (true) {
         SDL_Event event;

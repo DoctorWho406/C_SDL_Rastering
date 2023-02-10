@@ -1,6 +1,6 @@
-#include "vector.h"
+#include "rastering_vector.h"
 
-vector2_t vector_get_size_from_origin_and_end(vector2_t start, vector2_t end) {
+vector2_t vector2_get_size_from_origin_and_end(vector2_t start, vector2_t end) {
     return (vector2_t) { end.x - start.x, end.y - start.y };
 }
 

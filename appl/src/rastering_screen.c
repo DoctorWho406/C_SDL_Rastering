@@ -1,4 +1,4 @@
-#include "screen.h"
+#include "rastering_screen.h"
 
 screen_t *screen_create(int w, int h, SDL_Renderer *r) {
     screen_t *screen = (screen_t *)SDL_malloc(sizeof(screen_t));
@@ -18,7 +18,7 @@ void screen_destroy(screen_t *s) {
     SDL_free(s);
 }
 
-void screen_put_pixel(screen_t *screen, vector2_t pixel, color_t* color) {
+void screen_put_pixel(screen_t *screen, vector2_t pixel, color_t *color) {
     if (pixel.x < 0 || pixel.x >= screen->width) return;
     if (pixel.y < 0 || pixel.y >= screen->height) return;
 

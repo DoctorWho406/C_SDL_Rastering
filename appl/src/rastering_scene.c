@@ -1,8 +1,8 @@
-#include "scene.h"
-#include "color.h"
-#include "line_raster.h"
-#include "vector.h"
-#include "triangle_raster.h"
+#include "rastering_scene.h"
+#include "rastering_color.h"
+#include "rastering_line_raster.h"
+#include "rastering_vector.h"
+#include "rastering_triangle_raster.h"
 
 scene_t *scene_create(int screen_width, int screen_height, float fov, SDL_Renderer *renderer) {
     scene_t *scene = (scene_t *)SDL_malloc(sizeof(scene_t));
@@ -17,7 +17,7 @@ scene_t *scene_create(int screen_width, int screen_height, float fov, SDL_Render
     }
     scene->screen = screen;
 
-    camera_t *camera = camera_create(fov);
+    camera_t *camera = camera_create(fov, screen_width, screen_height);
     if (!screen) {
         SDL_free(screen);
         SDL_free(scene);

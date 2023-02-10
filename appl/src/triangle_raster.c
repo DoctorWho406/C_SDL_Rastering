@@ -1,4 +1,4 @@
-#include "triangle_raster.h"
+#include "rastering_triangle_raster.h"
 #include "rastering_math.h"
 
 bool bbox_is_point_in_tirangle(vector2_t point, vector2_t p1, vector2_t p2, vector2_t p3) {

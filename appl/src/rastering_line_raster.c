@@ -1,5 +1,5 @@
 #include "SDL.h"
-#include "line_raster.h"
+#include "rastering_line_raster.h"
 
 void dda_line_raster(screen_t *screen, vector2_t p1, vector2_t p2, color_t *color) {
     int dx = p2.x - p1.x;

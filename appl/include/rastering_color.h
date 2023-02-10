@@ -1,5 +1,5 @@
-#ifndef __COLOR_H
-#define __COLOR_H
+#ifndef __RASTERING_COLOR_H
+#define __RASTERING_COLOR_H
 #include "SDL.h"
 
 typedef struct {
@@ -9,4 +9,4 @@ typedef struct {
     Uint8 a;
 } color_t;
 
-#endif //__COLOR_H
+#endif //__RASTERING_COLOR_H
