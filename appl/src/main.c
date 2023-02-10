@@ -12,7 +12,7 @@ int main() {
     int width = 640;
     int height = 480;
 
-    SDL_Window* window = SDL_CreateWindow(
+    SDL_Window *window = SDL_CreateWindow(
         "First SDL2 Window",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
@@ -26,12 +26,11 @@ int main() {
         return 1;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == NULL) {
         printf("Could not create renderer: %s\n", SDL_GetError());
         return 2;
     }
-    //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
     Uint64 curr_count = SDL_GetPerformanceCounter();
     Uint64 last_count = curr_count;
@@ -41,7 +40,7 @@ int main() {
 
     char title[100];
 
-    scene_t* scene = scene_create(width, height, renderer);
+    scene_t *scene = scene_create(width, height, renderer);
 
     while (true) {
         SDL_Event event;
@@ -71,7 +70,7 @@ int main() {
 
     scene_destroy(scene);
     SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);  
+    SDL_DestroyWindow(window);
     SDL_Quit();
 
     return 0;

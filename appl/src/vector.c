@@ -1,10 +1,9 @@
 #include "vector.h"
 
-vector3f_t vector3f_sub(vector3f_t v1, vector3f_t v2) 
-{
-    vector3f_t r;
-    r.x = v1.x - v2.x;
-    r.y = v1.y - v2.y;
-    r.z = v1.z - v2.z;
-    return r;
+vector2_t vector_get_size_from_origin_and_end(vector2_t start, vector2_t end) {
+    return (vector2_t) { end.x - start.x, end.y - start.y };
+}
+
+vector3f_t vector3f_sub(vector3f_t a, vector3f_t b) {
+    return (vector3f_t) { b.x - a.x, b.y - a.y, b.z - a.z };
 }
