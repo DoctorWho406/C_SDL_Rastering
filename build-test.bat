@@ -34,5 +34,9 @@ IF %ERRORLEVEL% NEQ 0 (
     GOTO QUIT
 )
 
+IF %ERRORLEVEL% EQU 0 (
+    XCOPY /E /Q /Y "%PRJ_PATH%\resources\" "%BIN_PATH%\resources\"
+)
+
 :QUIT
 echo %MESSAGE%
