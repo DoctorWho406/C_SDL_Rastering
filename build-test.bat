@@ -1,9 +1,9 @@
 @echo off
 set BAT_BASE_PATH=%~dp0
 set PRJ_BASE_PATH=%BAT_BASE_PATH%
-set BIN_PATH=%PRJ_BASE_PATH%\bin\test
-set PRJ_PATH=%PRJ_BASE_PATH%\test
-set APPL_PATH=%PRJ_BASE_PATH%\appl
+set BIN_PATH=%PRJ_BASE_PATH%bin\test
+set PRJ_PATH=%PRJ_BASE_PATH%test
+set APPL_PATH=%PRJ_BASE_PATH%appl
 set MESSAGE=Build for test OK
 
 RMDIR /s /q %BIN_PATH%
