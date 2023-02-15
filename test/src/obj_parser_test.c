@@ -63,7 +63,7 @@ CLOVE_TEST(TestQuadParse) {
    CLOVE_FLOAT_EQ(0, mesh->triangles[0].v3.normal.x);
    CLOVE_FLOAT_EQ(0, mesh->triangles[0].v3.normal.y);
    CLOVE_FLOAT_EQ(1, mesh->triangles[0].v3.normal.z);
-   
+
    //T2
    //V1
    //Position
@@ -101,4 +101,17 @@ CLOVE_TEST(TestQuadParse) {
    CLOVE_FLOAT_EQ(0, mesh->triangles[1].v3.normal.x);
    CLOVE_FLOAT_EQ(0, mesh->triangles[1].v3.normal.y);
    CLOVE_FLOAT_EQ(1, mesh->triangles[1].v3.normal.z);
+}
+
+CLOVE_TEST(TestSuzanneVertexesCount) {
+   const char *base_test_path = CLOVE_EXEC_BASE_PATH();
+   const char *source_path = tut_concat_path(base_test_path, "\\resources\\suzanne.obj");
+
+   obj_t *mesh;
+   CLOVE_INT_EQ(0, obj_parser_parse(&mesh, source_path));
+   CLOVE_NOT_NULL(mesh);
+   CLOVE_INT_EQ(511, mesh->vertex_count);
+   CLOVE_INT_EQ(590, mesh->vertex_texture_count);
+   CLOVE_INT_EQ(507, mesh->vertex_normal_count);
+   CLOVE_INT_EQ(968, mesh->face_count);
 }

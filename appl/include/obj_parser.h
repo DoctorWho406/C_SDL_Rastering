@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct obj_parser_float3 {
     float x;
@@ -35,7 +36,8 @@ typedef struct obj {
     obj_parser_triangle_t *triangles;
 } obj_t;
 
-int obj_parser_parse(obj_t **mesh, const char *obj_path);
+int obj_parser_parse(obj_t **, const char *obj_path);
+void obj_parser_destroy(obj_t *);
 
 #ifdef OBJ_PARSER_IMPLEMENTATION
 int obj_parser_parse(obj_t **mesh, const char *obj_path) {
@@ -49,7 +51,7 @@ int obj_parser_parse(obj_t **mesh, const char *obj_path) {
         return result;
     }
 
-    *mesh = (obj_t *)malloc(sizeof(obj_t));
+    *mesh = (obj_t *)calloc(1, sizeof(obj_t));
     if (*mesh == NULL) {
         printf("Error while allocate memory for mesh\n");
         fclose(file);
@@ -57,12 +59,7 @@ int obj_parser_parse(obj_t **mesh, const char *obj_path) {
     }
 
     const int buffer_size = 1024;
-    char buffer[buffer_size];
-
-    (*mesh)->vertex_count = 0;
-    (*mesh)->vertex_texture_count = 0;
-    (*mesh)->vertex_normal_count = 0;
-    (*mesh)->face_count = 0;
+    char buffer[1024];
 
     while (fgets(buffer, buffer_size, file)) {
         if (strncmp(buffer, "v ", 2) == 0) {
@@ -228,6 +225,11 @@ int obj_parser_parse(obj_t **mesh, const char *obj_path) {
     free(vertexes);
 
     return 0;
+}
+
+void obj_parser_destroy(obj_t *mesh) {
+    free(mesh->triangles);
+    free(mesh);
 }
 #endif //OBJ_PARSER_IMPLEMENTATION
 
