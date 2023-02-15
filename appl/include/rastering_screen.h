@@ -16,7 +16,7 @@ typedef struct {
 
 screen_t *screen_create(int width, int height, SDL_Renderer *);
 void screen_destroy(screen_t *);
-void screen_put_pixel(screen_t *, vector2_t pixel, color_t *);
+void screen_put_pixel(screen_t *, vector2_t *pixel, color_t *);
 void screen_blit(screen_t *);
 void screen_clear(screen_t *);
 

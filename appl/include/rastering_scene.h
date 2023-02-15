@@ -4,10 +4,13 @@
 #include "SDL.h"
 #include "rastering_screen.h"
 #include "rastering_camera.h"
+#include "obj_parser.h"
 
 typedef struct {
     screen_t *screen;
     camera_t *camera;
+    obj_t *quad;
+    obj_t *suzanne;
 } scene_t;
 
 

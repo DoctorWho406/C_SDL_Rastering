@@ -18,11 +18,11 @@ void screen_destroy(screen_t *s) {
     SDL_free(s);
 }
 
-void screen_put_pixel(screen_t *screen, vector2_t pixel, color_t *color) {
-    if (pixel.x < 0 || pixel.x >= screen->width) return;
-    if (pixel.y < 0 || pixel.y >= screen->height) return;
+void screen_put_pixel(screen_t *screen, vector2_t *pixel, color_t *color) {
+    if (pixel->x < 0 || pixel->x >= screen->width) return;
+    if (pixel->y < 0 || pixel->y >= screen->height) return;
 
-    int index = (pixel.y * screen->width + pixel.x) * 4;
+    int index = (pixel->y * screen->width + pixel->x) * 4;
     screen->color_buffer[index + 0] = color->r;
     screen->color_buffer[index + 1] = color->g;
     screen->color_buffer[index + 2] = color->b;
