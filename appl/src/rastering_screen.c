@@ -8,6 +8,8 @@ screen_t *screen_create(int w, int h, SDL_Renderer *r) {
     screen->texture = SDL_CreateTexture(r, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STATIC, w, h);
     screen->color_buffer_size = w * h * 4 * sizeof(Uint8);
     screen->color_buffer = (Uint8 *)SDL_malloc(screen->color_buffer_size);
+    screen->depth_buffer_size = w * h * sizeof(float);
+    screen->depth_buffer = (float *)SDL_malloc(screen->depth_buffer_size);
 
     return screen;
 }
@@ -15,14 +17,20 @@ screen_t *screen_create(int w, int h, SDL_Renderer *r) {
 void screen_destroy(screen_t *s) {
     SDL_DestroyTexture(s->texture);
     SDL_free(s->color_buffer);
+    SDL_free(s->depth_buffer);
     SDL_free(s);
 }
 
-void screen_put_pixel(screen_t *screen, vector2_t *pixel, color_t *color) {
+void screen_put_pixel(screen_t *screen, vector2_t *pixel, float depth, color_t *color) {
     if (pixel->x < 0 || pixel->x >= screen->width) return;
     if (pixel->y < 0 || pixel->y >= screen->height) return;
 
-    int index = (pixel->y * screen->width + pixel->x) * 4;
+    int index = (pixel->y * screen->width + pixel->x);
+    if (screen->depth_buffer[index] >= depth) return;
+
+    screen->depth_buffer[index] = depth;
+
+    index *= 4;
     screen->color_buffer[index + 0] = color->r;
     screen->color_buffer[index + 1] = color->g;
     screen->color_buffer[index + 2] = color->b;
@@ -36,4 +44,5 @@ void screen_blit(screen_t *screen) {
 
 void screen_clear(screen_t *screen) {
     SDL_memset(screen->color_buffer, 0, screen->color_buffer_size);
+    SDL_memset(screen->depth_buffer, 0xFF, screen->depth_buffer_size);
 }

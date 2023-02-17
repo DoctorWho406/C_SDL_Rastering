@@ -27,6 +27,8 @@ vector2_t vector2_get_size_from_origin_and_end(vector2_t *origin, vector2_t *end
 
 void vector2_sort_by_y(vector2_t **, vector2_t **, vector2_t **);
 
+vector2f_t vector2f_interpolate(vector2f_t *v1, vector2f_t *v2, float gradient);
+
 vector3f_t vector3f_sub(vector3f_t *, vector3f_t *);
 
 vector3f_t vector3f_mul(vector3f_t *a, float b);

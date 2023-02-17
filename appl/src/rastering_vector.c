@@ -26,6 +26,13 @@ void vector2_sort_by_y(vector2_t **p1, vector2_t **p2, vector2_t **p3) {
     }
 }
 
+vector2f_t vector2f_interpolate(vector2f_t* v1, vector2f_t* v2, float gradient) {
+    return (vector2f_t) {
+        interpolate_scalar(v1->x, v1->y, gradient),
+        interpolate_scalar(v2->x, v2->y, gradient),
+    };
+}
+
 vector3f_t vector3f_sub(vector3f_t *a, vector3f_t *b) {
     return (vector3f_t) { b->x - a->x, b->y - a->y, b->z - a->z };
 }

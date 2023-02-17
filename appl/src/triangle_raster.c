@@ -29,7 +29,7 @@ void bbox_triangle_raster(screen_t *screen, vector2_t *p1, vector2_t *p2, vector
         for (size_t y = min.y; y <= max.y; ++y) {
             vector2_t point = {x, y};
             if (bbox_is_point_in_tirangle(&point, p1, p2, p3)) {
-                screen_put_pixel(screen, &point, color);
+                screen_put_pixel(screen, &point, 0, color);
             }
         }
     }

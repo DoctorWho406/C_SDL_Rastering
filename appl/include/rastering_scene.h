@@ -5,11 +5,13 @@
 #include "rastering_screen.h"
 #include "rastering_camera.h"
 #include "obj_parser.h"
+#include "rastering_texture.h"
 
 typedef struct {
     screen_t *screen;
     camera_t *camera;
     obj_t *quad;
+    texture_t* quad_texture;
     obj_t *suzanne;
 } scene_t;
 
