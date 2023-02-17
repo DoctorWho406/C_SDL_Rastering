@@ -4,6 +4,7 @@
 texture_t *texture_load(const char *path) {
     SDL_Surface *surface = IMG_Load(path);
     if (!surface) {
+        SDL_Log("Errore creating surface");
         return NULL;
     }
 
@@ -13,10 +14,12 @@ texture_t *texture_load(const char *path) {
     texture->pixel_size = surface->format->BytesPerPixel;
     texture->data = SDL_malloc(texture->width * texture->heigth * texture->pixel_size * sizeof(Uint8));
     if (!texture->data) {
+        SDL_Log("Errore creating data");
         free(texture);
         SDL_FreeSurface(surface);
         return NULL;
     }
+    SDL_memcmp(texture->data, surface->pixels, texture->width * texture->heigth * texture->pixel_size * sizeof(Uint8));
     SDL_FreeSurface(surface);
     return texture;
 }
